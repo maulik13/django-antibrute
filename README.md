@@ -10,3 +10,6 @@ Refer to the docs for details on how to configure different functions of the app
 With the recorded failure data, it is possible to detect if the attack is 
 distributed. At present there are no direct feature utilizing this but can be 
 added in the future. 
+
+
+__For documentation read "howto" in docs.__

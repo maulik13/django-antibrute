@@ -12,6 +12,9 @@ lockout_msg = "Too many login attempts. Please try again in few seconds."
 
 def process_login_attempt(request, username, success):
     """
+    Process given login attempt and store it and decide what to do next.
+    @success parameter denotes if attempt was failure or success.
+
     """
     attempt = AccessAttempt.objects.add_attempt(request, username, safe=success)
     # if failed find the count and update lock status
@@ -31,7 +34,9 @@ def lock_user(username):
 
 def check_and_update_lock(username):
     """
-    Check lock status, if expired then delete
+    Check lock status for a given user name.
+    If locked, check time passed since it was locked.
+    If cool off period has already passed then remove lock
     """
     try:
         locked_user_status = LockedUser.objects.get(username=username)
@@ -47,6 +52,9 @@ def check_and_update_lock(username):
 
 
 def get_lockout_response(request, remaining_sec):
+    """
+    Based on configuration get the lockout HttpResponse and return
+    """
     if LOCKOUT_MSG_URL:
         return redirect(LOCKOUT_MSG_URL)
 
