@@ -1,0 +1,4 @@
+include LICENSE
+include README.rst
+recursive-include antibrute/templates *
+recursive-include docs *
